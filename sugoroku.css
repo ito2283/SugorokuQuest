@@ -1,0 +1,101 @@
+@charset "UTF-8";
+
+/* 画面全体をflexで縦横中央寄せ */
+body, html {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    justify-content: center;   /* 横方向中央 */
+    align-items: center;       /* 縦方向中央 */
+    font-family: monospace;
+    background-color: #eee;
+    background-image: url("images/sogen_hana_02.png");
+    background-repeat: repeat;
+    background-size: 8%;
+    color: #000;
+}
+
+/* 全体のラッパー */
+#container {
+    display: flex;
+    flex-direction: column;    /* 縦に並べる */
+    align-items: center;       /* 子要素を横中央に */
+    gap: 20px;                 /* 子要素の縦間隔 */
+    width: 90vw;               /* 画面幅の90% */
+    max-width: 1200px;         /* 最大幅600px */
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+#log {
+    font-size: 20px;
+    white-space: pre-line;
+    border: 1px solid #555;
+    border-radius: 16px;
+    padding: 10px;
+    height: 300px;             /* 少し縮めてレスポンシブ対応 */
+    overflow-y: auto;
+    background-color: rgba(255, 255, 255, 0.8);
+    width: 100%;               /* 幅いっぱい */
+    box-sizing: border-box;
+}
+
+#controls {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;           /* ボタン折り返し */
+    justify-content: center;   /* 中央寄せ */
+    gap: 10px;
+}
+
+button {
+    margin: 10px;
+    padding: 16px 32px;          /* 大きめの内側余白（上下16px、左右32px） */
+    border-radius: 6px;          /* 角丸 */
+    font-size: 18px;             /* 文字を大きさ */
+    cursor: pointer;             /* マウスカーソルをポインターに合わせる */
+    background-color: #f0f0f0;
+    border: 1px solid #555;
+    transition: background-color 0.3s ease; /* 色変化をなめらかに */
+    flex: 1 1 auto;            /* 幅調整しやすく */
+    min-width: 140px;          /* 最低幅を指定 */
+    max-width: 200px;          /* 最大幅を指定 */
+}
+
+button:hover {
+    background-color: #2196F3; /* 青色 */
+    color: white;              /* 文字色を白にしてコントラスト確保 */
+}
+
+h1 {
+    display: inline-block;       /* 枠が文字サイズにフィット */
+    color:white;
+    background-color: #555;    /* 半透明の背景色 */
+    border: 2px solid black;   /* 枠線 */
+    padding: 8px 16px;           /* 内側の余白 */
+    margin: 10px 0;              /* 上下の余白 */
+}
+
+#board {
+    display: flex;
+    flex-wrap: wrap;             /* 横に入りきらない分は折り返し */
+    gap: 5px;                    /* マス間の隙間 */
+    width: 100%;
+    justify-content: center;     /* マスを中央寄せ */
+}
+.square {
+    flex: 0 1 80px;              /* 基本幅80px、縮む/広がる余地あり */
+    aspect-ratio: 1 / 1;         /* 常に正方形を維持 */
+    border: 1px solid #555;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    font-size: 18px;             /* ボタンと同じ文字サイズ */
+    border-radius: 6px;          /* ボタンと同じ角丸 */
+}
+.square img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;         /* 画像比率を保ってフィット */
+}
