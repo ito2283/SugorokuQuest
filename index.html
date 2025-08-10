@@ -43,7 +43,7 @@ class Field {
                 this.here += this.dice;
                 this.enc = rand(1, 10);
                 drawBoard(this.here);                //drawBoardを呼び出し、flexの現在地を更新
-                log(`<span style="color: blue;">\n${this.dice}マス移動します。\n</span>`);
+                log(`<span style="color: green;">\n${this.dice}マス移動します。\n</span>`);
 
                 if (this.here >= 10) {
                     await sleep(500);
@@ -51,7 +51,7 @@ class Field {
                 }
                 if (this.enc > 4) {
                     await sleep(300);
-                    log("モンスターが現れた！！\n");
+                    log('<span style="color: red;">モンスターが現れた！！\n</span>');
                     return "battle";
                 }
             } else if (this.pAct === 2) {           // 休息
@@ -67,7 +67,7 @@ class Field {
                 this.enc = rand(1, 10);
                 if (this.enc > 7) {
                     await sleep(300);
-                    log("モンスターが現れた！！\n");
+                    log('<span style="color: red;">モンスターが現れた！！\n</span>');
                     return "battle";
                 }
             }
