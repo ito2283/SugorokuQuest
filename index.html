@@ -9,7 +9,7 @@
 
 <body>
 <div id="container">
-<h1>すごろくクエスト</h1>
+<img src="images/SQ_board.jpeg" alt="すごろくクエスト" class="title-img">
 <div id="log"></div>
 <div id="controls"></div>
 <div id="board"></div>
@@ -24,10 +24,11 @@ class Field {
         this.enc = 0;    // エンカウント
         this.dice = 0;   // サイコロ
         this.pHp = 10;   // プレイヤーHP
+        this.enemyPos = null;  // ★ 敵位置（nullは敵なし）
     }
     async board() {
         log("10マス目に到達してください。\n");
-        drawBoard(this.here);                       //drawBoardを呼び出し、flexの初期表示
+        drawBoard(this.here, this.enemyPos);       //drawBoardを呼び出し、flexの初期表示
 
         while (this.here < 10) {
             await sleep(500);
@@ -52,6 +53,8 @@ class Field {
                 if (this.enc > 4) {
                     await sleep(300);
                     log('<span style="color: red;">モンスターが現れた！！\n</span>');
+                    this.enemyPos = this.here + 1; // ★ 次のマスに敵
+                    drawBoard(this.here, this.enemyPos);
                     return "battle";
                 }
             } else if (this.pAct === 2) {           // 休息
@@ -68,6 +71,8 @@ class Field {
                 if (this.enc > 7) {
                     await sleep(300);
                     log('<span style="color: red;">モンスターが現れた！！\n</span>');
+                    this.enemyPos = this.here + 1; // ★ 次のマスに敵
+                    drawBoard(this.here, this.enemyPos);
                     return "battle";
                 }
             }
@@ -114,6 +119,8 @@ class Quest extends Field {
         if (this.pHp > 0 && this.eHp <= 0) {
             await sleep(300);
             log('<span style="color: green;">\nプレイヤーの勝利！</span>');
+            this.enemyPos = null;           // ★ 敵を消す
+            drawBoard(this.here, this.enemyPos);
         } else if (this.pHp <= 0 && this.eHp > 0) {
             await sleep(300);
             log('<span style="color: green;">\nプレイヤーは敗れた！</span>');
@@ -190,7 +197,7 @@ function waitCommand(labels) {  //ボタン（ラベル）を表示して、ク�
         });
     });
 }
-function drawBoard(here) {      //flexの表示設定
+function drawBoard(here, enemyPos) {      //flexの表示設定
     const boardDiv = document.getElementById("board");          //HTMLのidであるboardを取得し代入
     boardDiv.innerHTML = "";                                    //前の盤面を消す
     
@@ -201,10 +208,11 @@ function drawBoard(here) {      //flexの表示設定
         square.classList.add("square");                         //CSS用のクラスsquareを追加。 .squareが適用される
         const img = document.createElement("img");              //新しい<img>要素（画像タグ）を作成し、代入
 
-        if (i === playerPos) {                                       //マスの番号 i がプレイヤーの位置 here と一致した場合
+        if (i === playerPos) {                                  //マスの番号 i がプレイヤーの位置 here と一致した場合
             img.src = "images/yusya.jpg";                       //画像の指定
-        }
-        else {                                                  //それ以外のマス
+        } else if (enemyPos !== null && i === enemyPos) {       // ★ 敵位置
+            img.src = "images/slime.jpg";
+        } else {                                                //それ以外のマス
             img.src = "images/sogen_01.png";                    //画像の指定
         }
         
