@@ -22,13 +22,24 @@ body, html {
     align-items: center;       /* 子要素を横中央に */
     gap: 20px;                 /* 子要素の縦間隔 */
     width: 90vw;               /* 画面幅の90% */
-    max-width: 1200px;         /* 最大幅600px */
+    max-width: 1200px;         /* 最大幅1200px */
     padding: 20px;
     box-sizing: border-box;
 }
-
+/* タイトル画像 */
+.title-img {
+    display: inline-block;
+    margin-top: 40px;
+    max-width: 50%;             /* 横幅を画面に合わせて縮小 */
+    height: auto;               /* 縦横比を維持 */
+    border: 2px solid black;
+    border-radius: 8px;
+    background-color: #555;
+    padding: 8px;
+}
+/* ログ */
 #log {
-    font-size: 20px;
+    font-size: 30px;
     white-space: pre-line;
     border: 1px solid #555;
     border-radius: 16px;
@@ -39,7 +50,7 @@ body, html {
     width: 100%;               /* 幅いっぱい */
     box-sizing: border-box;
 }
-
+/* 移動 休息 攻撃 防御 */
 #controls {
     width: 100%;
     display: flex;
@@ -47,7 +58,7 @@ body, html {
     justify-content: center;   /* 中央寄せ */
     gap: 10px;
 }
-
+/* ボタン */
 button {
     margin: 16px;
     padding: 22px 38px;          /* 大きめの内側余白（上下16px、左右32px） */
@@ -61,21 +72,11 @@ button {
     min-width: 140px;          /* 最低幅を指定 */
     max-width: 200px;          /* 最大幅を指定 */
 }
-
 button:hover {
     background-color: #2196F3; /* 青色 */
     color: white;              /* 文字色を白にしてコントラスト確保 */
 }
-
-h1 {
-    display: inline-block;       /* 枠が文字サイズにフィット */
-    color:white;
-    background-color: #555;    /* 半透明の背景色 */
-    border: 2px solid black;   /* 枠線 */
-    padding: 8px 16px;           /* 内側の余白 */
-    margin: 10px 0;              /* 上下の余白 */
-}
-
+/* マス目 */
 #board {
     display: flex;
     flex-wrap: wrap;             /* 横に入りきらない分は折り返し */
